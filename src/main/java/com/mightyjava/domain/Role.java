@@ -15,25 +15,21 @@ public class Role {
 	@Id
 	@GeneratedValue
 	private Long id;
-	@NotNull
 	private String name;
+
 	@OneToMany(targetEntity = User.class, mappedBy = "role", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Set<User> users;
 
-	public Long getId() {
-		return id;
+	public Role() {
 	}
 
-	public void setId(Long id) {
+	public Role(Long id, @NotNull String name) {
 		this.id = id;
+		this.name = name;
 	}
 
 	public String getName() {
 		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 }

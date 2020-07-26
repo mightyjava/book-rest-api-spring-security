@@ -27,17 +27,24 @@ public class Application implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		Role role = new Role();
-		role.setName("admin");
-		roleService.saveOrUpdate(role);
+		roleService.saveOrUpdate(new Role(1L, "admin"));
+		roleService.saveOrUpdate(new Role(2L, "user"));
 		
-		User user = new User();
-		user.setEmail("test@test.com");
-		user.setName("Test User");
-		user.setMobile("9787456545");
-		user.setRole(roleService.findById(1L).get());
-		user.setPassword(new BCryptPasswordEncoder().encode("test"));
-		userService.saveOrUpdate(user);
+		User user1 = new User();
+		user1.setEmail("test@user.com");
+		user1.setName("Test User");
+		user1.setMobile("9787456545");
+		user1.setRole(roleService.findById(2L).get());
+		user1.setPassword(new BCryptPasswordEncoder().encode("testuser"));
+		userService.saveOrUpdate(user1);
+		
+		User user2 = new User();
+		user2.setEmail("test@admin.com");
+		user2.setName("Test Admin");
+		user2.setMobile("9787456545");
+		user2.setRole(roleService.findById(1L).get());
+		user2.setPassword(new BCryptPasswordEncoder().encode("testadmin"));
+		userService.saveOrUpdate(user2);
 		
 		Book book = new Book();
 		book.setTitle("Spring Microservices in Action");
